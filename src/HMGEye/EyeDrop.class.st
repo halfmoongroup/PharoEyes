@@ -15,6 +15,14 @@ Class {
 	#category : #'HMGEye-functional'
 }
 
+{ #category : #'instance creation' }
+EyeDrop class >> fromDrop: aDrop [ 
+
+	| instance | 
+	instance := self basicNew. 
+	^ instance initializeFromDrop: aDrop. 
+]
+
 { #category : #api }
 EyeDrop >> addStep: name withDuration: minutes [
 
@@ -56,6 +64,12 @@ EyeDrop >> initialize [
 	steps := OrderedCollection new. 
 	stepNames := OrderedCollection new. 
 	
+]
+
+{ #category : #initialization }
+EyeDrop >> initializeFromDrop: aDrop [
+  self initialize.
+  ^self drop: aDrop.
 ]
 
 { #category : #api }
