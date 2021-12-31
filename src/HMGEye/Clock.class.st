@@ -11,7 +11,7 @@ Class {
 		'runningclock',
 		'action'
 	],
-	#category : #HMGEye
+	#category : #'HMGEye-functional'
 }
 
 { #category : #initialize }
@@ -59,9 +59,9 @@ Clock >> initialize [
 { #category : #initialization }
 Clock >> initializeWith: aBlock andDuration:aNumber [
 
-	super initialize. 
 	action := aBlock.
 	duration := aNumber. 
+	self reset
 ]
 
 { #category : #initialization }

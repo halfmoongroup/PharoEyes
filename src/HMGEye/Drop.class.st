@@ -9,28 +9,45 @@ Class {
 		'dropTimes',
 		'status'
 	],
-	#category : #HMGEye
+	#category : #'HMGEye-functional'
 }
 
 { #category : #initialization }
 Drop class >> sampleData [
 
 	| data |
-	self  initialize. 
+	self initialize.
 	data := OrderedCollection new.
 	^ data
-		  add: (Drop
+		  add: (self class
 				   withName: 'wash'
-				   times: (DropTimes withClosed: 4 open: 0 rest: 0)
-				   status: 3);
-		  add: (Drop
+				   times: (DropTimes withClosed: 3 open: 0 rest: 0)
+				   status: 11);
+		  add: (self class
+				   withName: 'refresh'
+				   times: (DropTimes withClosed: 2 open: 6 rest: 2)
+				   status: 11);
+		  add: (self class
+				   withName: 'alphagan'
+				   times: (DropTimes withClosed: 2 open: 9 rest: 2)
+				   status: 11);
+		  add: (self class
 				   withName: 'azopt'
-				   times: (DropTimes withClosed: 4 open: 0 rest: 0)
-				   status: 3);
-		  add: (Drop
+				   times: (DropTimes withClosed: 2 open: 14 rest: 2)
+				   status: 11);
+		  add: (self class
+				   withName: 'restasis'
+				   times: (DropTimes withClosed: 2 open: 2 rest: 2)
+				   status: 11);
+		  add: (self class
 				   withName: 'lantanaprost'
-				   times: (DropTimes withClosed: 4 open: 0 rest: 0)
-				   status: 3); yourself 
+				   times: (DropTimes withClosed: 2 open: 0 rest: 2)
+				   status: 10);
+		  add: (self class
+				   withName: 'geldrops'
+				   times: (DropTimes withClosed: 2 open: 6 rest: 0)
+				   status: 10);
+		  yourself
 ]
 
 { #category : #initialize }

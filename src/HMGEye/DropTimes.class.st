@@ -9,7 +9,7 @@ Class {
 		'open',
 		'rest'
 	],
-	#category : #HMGEye
+	#category : #'HMGEye-functional'
 }
 
 { #category : #initialization }

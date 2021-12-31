@@ -8,7 +8,7 @@ Class {
 		'eyedrops',
 		'clock'
 	],
-	#category : #HMGEye
+	#category : #'HMGEye-functional'
 }
 
 { #category : #initialization }
