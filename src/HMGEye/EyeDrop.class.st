@@ -79,6 +79,17 @@ EyeDrop >> nextStep [
 	self startSteps 
 ]
 
+{ #category : #'accessing - computed' }
+EyeDrop >> percentage [ 
+
+	^ timer ifNil: [ ^0 ]
+	ifNotNil: [ 
+			step > (steps size) 
+				ifTrue: [^0]
+				ifFalse: [^ (self timer tick) /(60 * steps at: step)]
+				]
+]
+
 { #category : #api }
 EyeDrop >> startSteps [
 

@@ -3,11 +3,12 @@ An application for managing process of applying eyedrops
 "
 Class {
 	#name : #EyeDropDay,
-	#superclass : #Object,
+	#superclass : #SpPresenter,
 	#instVars : [
 		'date',
-		'morningDrops',
-		'eveningDrops'
+		'drops',
+		'timer',
+		'info'
 	],
 	#category : #'HMGEye-functional'
 }

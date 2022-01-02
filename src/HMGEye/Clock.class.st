@@ -94,9 +94,10 @@ Clock >> runningclock: anObject [
 Clock >> start [
 
 	runningclock isActiveProcess  ifFalse: [ 
-		status := 1.
-		runningclock resume ].
-	^ runningclock isActiveProcess 
+		self status: 1.
+		runningclock resume.
+		].
+	^ self status.  
 ]
 
 { #category : #accessing }
