@@ -8,7 +8,9 @@ Class {
 		'progressBar',
 		'startButton',
 		'endButton',
-		'resetButton'
+		'resetButton',
+		'secondsPassed',
+		'timeRemaining'
 	],
 	#category : #'HMGEye-ui'
 }
@@ -21,10 +23,8 @@ EyeDropInfoPresenter >> eyeDrop [
 
 { #category : #accessing }
 EyeDropInfoPresenter >> eyeDrop: anEyeDrop [
-
-	name label: anEyeDrop drop name. 
-	phase label: anEyeDrop stepName. 
-	eyeDrop := anEyeDrop
+	eyeDrop := anEyeDrop.
+	eyeDrop addWatcher: self. 
 
 ]
 
@@ -34,7 +34,9 @@ EyeDropInfoPresenter >> initializePresenter [
 	| pauseButton |
 	name := self newLabel.
 	phase := self newLabel.
-	startButton := self newButton label: 'Start'.
+	timeRemaining := self newLabel label: '0:00'.
+	secondsPassed := self newLabel label: '0:00'.
+	startButton := self newButton label: 'Start'; action: [self  start].
 	pauseButton := self newButton label: 'Pause'.
 	resetButton := self newButton label: 'Reset'.
 	progressBar := self newProgressBar.
@@ -47,17 +49,31 @@ EyeDropInfoPresenter >> initializePresenter [
 					  add: 'Drop Info: ' expand: false;
 					  add: name expand: false;
 					  add: phase expand: false;
-					  yourself) 
+					  yourself)
 			 expand: false;
-			 add: progressBar withConstraints: [:constraints | constraints height:20];
+			 add: (SpBoxLayout newHorizontal  
+					  spacing: 15;
+					  add: secondsPassed expand: false;
+					  add: (SpBoxLayout newTopToBottom
+								add: progressBar withConstraints: [ :constraints | constraints height: 15]);
+					  add: timeRemaining expand: false;
+					  yourself)
+			 expand: false;
 			 add: (SpBoxLayout newLeftToRight
 					  spacing: 15;
 					  add: startButton;
 					  add: pauseButton;
 					  add: resetButton;
 					  yourself)
-					expand: false;
-			 yourself)
+			 expand: false;
+			 yourself)    
+]
+
+{ #category : #updating }
+EyeDropInfoPresenter >> modelChanged [
+	
+	name label: (self eyeDrop) drop name. 
+	phase label: (self eyeDrop) stepName. 
 ]
 
 { #category : #accessing }
@@ -101,4 +117,11 @@ EyeDropInfoPresenter >> progressBar [
 EyeDropInfoPresenter >> progressBar: anObject [
 
 	progressBar := anObject
+]
+
+{ #category : #accessing }
+EyeDropInfoPresenter >> start [ 
+" eyeDrop start."
+ eyeDrop addWatcher: self. 
+ self modelChanged 
 ]

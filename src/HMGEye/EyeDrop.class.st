@@ -10,7 +10,8 @@ Class {
 		'step',
 		'steps',
 		'timer',
-		'stepNames'
+		'stepNames',
+		'watchers'
 	],
 	#category : #'HMGEye-functional'
 }
@@ -31,14 +32,10 @@ EyeDrop >> addStep: name withDuration: minutes [
 	stepNames add: name
 ]
 
-{ #category : #announce }
-EyeDrop >> announceStepStatus: stepStatus [
+{ #category : #adding }
+EyeDrop >> addWatcher: aWatcher [
 
-	| line |
-	line := self drop name.
-	step <= (self stepNames size) ifTrue:
-		[ line := line , ' ' , (self stepNames at: step) ].
-	 ^(line,' ', stepStatus) traceCr
+	 watchers add: aWatcher
 ]
 
 { #category : #accessing }
@@ -63,6 +60,7 @@ EyeDrop >> initialize [
 	step := 1.
 	steps := OrderedCollection new. 
 	stepNames := OrderedCollection new. 
+	watchers := Set new. 
 	
 ]
 
@@ -74,9 +72,9 @@ EyeDrop >> initializeFromDrop: aDrop [
 
 { #category : #api }
 EyeDrop >> nextStep [ 
-	self announceStepStatus: ' ending'.
 	step := step + 1.
-	self startSteps 
+	watchers ifNotEmpty:  [ watchers do: [ :watcher | watcher modelChanged] ].
+	self start 
 ]
 
 { #category : #'accessing - computed' }
@@ -90,10 +88,15 @@ EyeDrop >> percentage [
 				]
 ]
 
-{ #category : #api }
-EyeDrop >> startSteps [
+{ #category : #removing }
+EyeDrop >> removeWatchers [
 
-	self announceStepStatus: ' starting'.
+	watchers := Set new.
+]
+
+{ #category : #api }
+EyeDrop >> start [
+
 	self startTime ifNil: [ self startTime: DateAndTime now ].
 	step <= steps size ifFalse: [ ^ self ].
 	timer := Clock
