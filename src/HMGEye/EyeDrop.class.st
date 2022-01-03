@@ -47,9 +47,8 @@ EyeDrop >> drop [
 { #category : #accessing }
 EyeDrop >> drop: aDrop [
 
-	self addStep: 'closed eyes' withDuration: aDrop dropTimes closed.
-	self addStep: 'open eyes' withDuration: aDrop dropTimes open.
-	self addStep: 'rest' withDuration: aDrop dropTimes rest. 
+	self addStep: 'closed eyes' withDuration: aDrop  closed.
+	self addStep: 'open eyes' withDuration: aDrop  open.
 	step  := 1.
 	drop := aDrop
 ]
@@ -72,7 +71,7 @@ EyeDrop >> initializeFromDrop: aDrop [
 
 { #category : #api }
 EyeDrop >> nextStep [ 
-	step := step + 1.
+	self step:  (self step + 1).
 	watchers ifNotEmpty:  [ watchers do: [ :watcher | watcher modelChanged] ].
 	self start 
 ]
@@ -148,6 +147,18 @@ EyeDrop >> stepNames: anObject [
 ]
 
 { #category : #accessing }
+EyeDrop >> steps [
+
+	^ steps
+]
+
+{ #category : #accessing }
+EyeDrop >> steps: anObject [
+
+	steps := anObject
+]
+
+{ #category : #accessing }
 EyeDrop >> timer [
 
 	^ timer
@@ -157,4 +168,10 @@ EyeDrop >> timer [
 EyeDrop >> timer: anObject [
 
 	^ timer := anObject
+]
+
+{ #category : #accessing }
+EyeDrop >> watchers [
+
+	^ watchers
 ]

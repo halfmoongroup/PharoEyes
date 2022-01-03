@@ -1,5 +1,5 @@
 "
-An application for managing process of applying eyedrops
+.838842-05:00 Test10.image priorSource: 99
 "
 Class {
 	#name : #EyeDropDay,

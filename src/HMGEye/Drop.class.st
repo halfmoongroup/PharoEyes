@@ -6,8 +6,9 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'name',
-		'dropTimes',
-		'status'
+		'closed',
+		'open',
+		'apply'
 	],
 	#category : #'HMGEye-functional'
 }
@@ -19,64 +20,78 @@ Drop class >> sampleData [
 	self initialize.
 	data := OrderedCollection new.
 	^ data
-		  add: (Drop
-				   withName: 'wash'
-				   times: (DropTimes withClosed: 3 open: 0 rest: 0)
-				   status: 11);
+		  add: (Drop withName: 'wash'
+					closed: 3
+				   open: 0
+				   apply: 11);
 		  add: (Drop
 				   withName: 'refresh'
-				   times: (DropTimes withClosed: 2 open: 6 rest: 2)
-				   status: 11);
-		  add: (Drop
-				   withName: 'alphagan'
-				   times: (DropTimes withClosed: 2 open: 9 rest: 2)
-				   status: 11);
+				closed: 2
+				open: 11
+				apply: 11);
 		  add: (Drop
 				   withName: 'azopt'
-				   times: (DropTimes withClosed: 2 open: 14 rest: 2)
-				   status: 11);
+					closed: 2
+					open: 16
+					apply: 11);
 		  add: (Drop
 				   withName: 'restasis'
-				   times: (DropTimes withClosed: 2 open: 2 rest: 2)
-				   status: 11);
+					closed: 2
+					open:0
+					apply: 11);
 		  add: (Drop
-				   withName: 'lantanaprost'
-				   times: (DropTimes withClosed: 2 open: 0 rest: 2)
-				   status: 10);
+				   	withName: 'lantanaprost'
+					closed: 2
+					open: 0
+					apply: 10);
+
 		  add: (Drop
 				   withName: 'geldrops'
-				   times: (DropTimes withClosed: 2 open: 6 rest: 0)
-				   status: 10);
+				   closed: 2
+					open: 0
+				   apply: 10);
 		  yourself
 ]
 
 { #category : #initialize }
-Drop class >> withName: aName times: aTime status: aStatus [
+Drop class >> withName: aName closed: closedt open: openT apply: applicationMask [
 	| instance |
 	
 	instance := self basicNew. 
-	^instance initializeWithName: aName dropTimes: aTime andStatus: aStatus. 
+	^instance initializeWithName: aName closed: closedt open: openT apply: applicationMask 
 ]
 
 { #category : #accessing }
-Drop >> dropTimes [
+Drop >> apply [
 
-	^ dropTimes
+	^ apply
 ]
 
 { #category : #accessing }
-Drop >> dropTimes: anObject [
+Drop >> apply: anObject [
 
-	dropTimes := anObject
+	apply := anObject
+]
+
+{ #category : #accessing }
+Drop >> closed [
+
+	^ closed
+]
+
+{ #category : #accessing }
+Drop >> closed: anObject [
+
+	closed := anObject
 ]
 
 { #category : #initialization }
-Drop >> initializeWithName: aName dropTimes: times andStatus: aStatus [
+Drop >> initializeWithName: aName closed: closedt open: opent apply: applicationMask [
 
-	self initialize.
-	name := aName.
-	dropTimes := times. 
-	status := aStatus
+	self name: aName;
+	closed: closedt;
+	open: opent;
+	apply: applicationMask.
 ]
 
 { #category : #accessing }
@@ -92,13 +107,13 @@ Drop >> name: anObject [
 ]
 
 { #category : #accessing }
-Drop >> status [
+Drop >> open [
 
-	^ status
+	^ open
 ]
 
 { #category : #accessing }
-Drop >> status: anObject [
+Drop >> open: anObject [
 
-	status := anObject
+	open := anObject
 ]
