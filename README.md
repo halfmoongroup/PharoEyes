@@ -10,3 +10,5 @@ A set of 4 or 5 drops can take a large difference in time to apply and so this a
 the steps of the process. 
 
 This is the beginning stages of this application. It's not very complete. 
+
+Added more tests
