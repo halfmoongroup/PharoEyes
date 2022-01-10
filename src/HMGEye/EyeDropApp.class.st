@@ -25,8 +25,9 @@ EyeDropApp class >> initializeWithDateAndTime: aDateTime [
 { #category : #initialization }
 EyeDropApp >> initialize [ 
 
-	super initialize.  
-	settings := Dictionary new. 
+	super initialize. 
+	 
+	settings := SpApplicationConfiguration new. 
 	runDate := DateAndTime now. 
 	model := EyeDropDay new. 
 	index := 1.
