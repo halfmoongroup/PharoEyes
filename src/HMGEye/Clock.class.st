@@ -11,7 +11,7 @@ Class {
 		'runningclock',
 		'action'
 	],
-	#category : #'HMGEye-functional'
+	#category : #HMGEye
 }
 
 { #category : #initialize }

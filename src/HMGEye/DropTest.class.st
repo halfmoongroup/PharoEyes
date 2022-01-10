@@ -1,7 +1,7 @@
 Class {
 	#name : #DropTest,
 	#superclass : #TestCase,
-	#category : #'HMGEye-test'
+	#category : #HMGEye
 }
 
 { #category : #tests }

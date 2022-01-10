@@ -12,7 +12,7 @@ Class {
 		'secondsPassed',
 		'timeRemaining'
 	],
-	#category : #'HMGEye-ui'
+	#category : #HMGEye
 }
 
 { #category : #accessing }

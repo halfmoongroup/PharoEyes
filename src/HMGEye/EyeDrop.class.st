@@ -13,7 +13,7 @@ Class {
 		'stepNames',
 		'watchers'
 	],
-	#category : #'HMGEye-functional'
+	#category : #HMGEye
 }
 
 { #category : #'instance creation' }

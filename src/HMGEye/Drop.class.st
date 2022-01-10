@@ -10,11 +10,11 @@ Class {
 		'open',
 		'apply'
 	],
-	#category : #'HMGEye-functional'
+	#category : #HMGEye
 }
 
 { #category : #initialization }
-Drop class >> sampleData [
+Drop class >> dropData [
 
 	| data |
 	self initialize.

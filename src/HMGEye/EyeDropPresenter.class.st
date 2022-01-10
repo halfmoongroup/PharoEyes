@@ -7,5 +7,5 @@ Class {
 		'eyeDropInfoPresenter',
 		'nextButton'
 	],
-	#category : #'HMGEye-ui'
+	#category : #HMGEye
 }
