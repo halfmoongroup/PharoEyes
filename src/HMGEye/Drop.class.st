@@ -10,7 +10,7 @@ Class {
 		'open',
 		'apply'
 	],
-	#category : #HMGEye
+	#category : #'HMGEye-functional'
 }
 
 { #category : #initialization }

@@ -10,7 +10,7 @@ Class {
 		'currentDrop',
 		'eyeDropInfoPresenter'
 	],
-	#category : #HMGEye
+	#category : #'HMGEye-ui'
 }
 
 { #category : #initialization }

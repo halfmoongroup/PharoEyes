@@ -10,7 +10,7 @@ Class {
 		'eveningDrops',
 		'drops'
 	],
-	#category : #HMGEye
+	#category : #'HMGEye-functional'
 }
 
 { #category : #'as yet unclassified' }
