@@ -39,8 +39,6 @@ EyeDropTest >> testInitializeFromDrop [
 	drop := Drop  withName: 'DropTest' closed: 1 open: 2 apply: 11.
 	testObj := EyeDrop fromDrop: drop. 
 	self assert: testObj drop equals: drop. 
-	self assert: testObj step equals: 1. 
-	self assert: testObj step  equals: 1.
 	self assert: testObj stepNames size equals: 2. 
 	self assert: (testObj stepNames at:1) equals:'closed eyes'.
 	self assert: (testObj stepNames at:2) equals:'open eyes'.
@@ -59,7 +57,6 @@ EyeDropTest >> testTimer [
 	testObject start.
 	self assert: (testObject timer) isNotNil equals: true. 
 	self assert: (testObject startTime isNotNil) equals: true.
-	self assert: (testObject step) equals: 1. 
 	self assert: (testObject stepName ) equals: 'closed eyes'.
 	self assert: (testObject startTime isNotNil) equals: true. 
 	
