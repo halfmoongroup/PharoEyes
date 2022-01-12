@@ -1,4 +1,5 @@
 # PharoEyes
+-- Can i?
 
 a simple application for timing the application of eyedrops. 
 Each drop has the same process of application. 
