@@ -5,9 +5,6 @@ Class {
 		'settings',
 		'model',
 		'runDate',
-		'drops',
-		'index',
-		'currentDrop',
 		'eyeDropInfoPresenter'
 	],
 	#category : #'HMGEye-ui'
@@ -22,18 +19,28 @@ EyeDropApp class >> initializeWithDateAndTime: aDateTime [
 	^ instance
 ]
 
-{ #category : #initialization }
-EyeDropApp >> initialize [ 
+{ #category : #accessing }
+EyeDropApp >> eyeDropInfoPresenter [
 
-	super initialize. 
-	 
-	settings := SpApplicationConfiguration new. 
-	runDate := DateAndTime now. 
-	model := EyeDropDay new. 
-	index := 1.
-	currentDrop := Drop new. 
-	eyeDropInfoPresenter := EyeDropInfoPresenter new. 
-	
+	^ eyeDropInfoPresenter
+]
+
+{ #category : #accessing }
+EyeDropApp >> eyeDropInfoPresenter: anObject [
+
+	eyeDropInfoPresenter := anObject
+]
+
+{ #category : #accessing }
+EyeDropApp >> model [
+
+	^ model
+]
+
+{ #category : #accessing }
+EyeDropApp >> model: anObject [
+
+	model := anObject
 ]
 
 { #category : #accessing }
@@ -49,13 +56,21 @@ EyeDropApp >> runDate: anObject [
 ]
 
 { #category : #accessing }
-EyeDropApp >> start [ 
+EyeDropApp >> settings [
 
-	drops := model drops. 
-	drops size isNotEmpty ifTrue: [ 
-		index := 1.
-		currentDrop := drops at: index. 
-		eyeDropInfoPresenter drop: currentDrop.
-		].
-	^self openWithSpec
+	^ settings
+]
+
+{ #category : #accessing }
+EyeDropApp >> settings: anObject [
+
+	settings := anObject
+]
+
+{ #category : #running }
+EyeDropApp >> start [
+	model drops: (EyeDropModel sampleEyeDropData).
+	eyeDropInfoPresenter eyeDrop: (self model currentDrop).
+   eyeDropInfoPresenter application: self. 
+	eyeDropInfoPresenter openWithSpec. 
 ]

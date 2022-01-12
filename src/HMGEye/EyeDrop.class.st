@@ -11,7 +11,8 @@ Class {
 		'steps',
 		'timer',
 		'stepNames',
-		'watchers'
+		'watchers',
+		'announcing'
 	],
 	#category : #'HMGEye-functional'
 }
@@ -24,6 +25,12 @@ EyeDrop class >> fromDrop: aDrop [
 	^ instance initializeFromDrop: aDrop. 
 ]
 
+{ #category : #'instance creation' }
+EyeDrop class >> fromDrops: aCollection [
+
+	^ aCollection collect: [ :item | self fromDrop: item]
+]
+
 { #category : #api }
 EyeDrop >> addStep: name withDuration: minutes [
 
@@ -32,10 +39,24 @@ EyeDrop >> addStep: name withDuration: minutes [
 	stepNames add: name
 ]
 
-{ #category : #adding }
+{ #category : #watching }
 EyeDrop >> addWatcher: aWatcher [
 
-	 watchers add: aWatcher
+	(watchers includes: aWatcher) ifFalse: [ watchers add: aWatcher ]
+]
+
+{ #category : #accessing }
+EyeDrop >> announcing [
+
+	^ (self watchers contains: self)
+]
+
+{ #category : #accessing }
+EyeDrop >> announcing: aBoolean [
+
+	(aBoolean) ifTrue: [ self addWatcher: self ]
+	ifFalse: [ self removeWatcher: self]
+
 ]
 
 { #category : #accessing }
@@ -53,6 +74,12 @@ EyeDrop >> drop: aDrop [
 	drop := aDrop
 ]
 
+{ #category : #'as yet unclassified' }
+EyeDrop >> dropName [
+
+	^ drop name. 
+]
+
 { #category : #initialization }
 EyeDrop >> initialize [ 
 
@@ -60,6 +87,7 @@ EyeDrop >> initialize [
 	steps := OrderedCollection new. 
 	stepNames := OrderedCollection new. 
 	watchers := Set new. 
+	announcing := false. 
 	
 ]
 
@@ -69,11 +97,21 @@ EyeDrop >> initializeFromDrop: aDrop [
   ^self drop: aDrop.
 ]
 
+{ #category : #initialization }
+EyeDrop >> modelChanged [ 
+	('model changed-> dropName ', (self dropName), ' step: ', self stepName) traceCr.
+]
+
+{ #category : #'as yet unclassified' }
+EyeDrop >> modelState [
+	self modelChanged
+]
+
 { #category : #api }
 EyeDrop >> nextStep [ 
-	self step:  (self step + 1).
+   step:= (step + 1).
 	watchers ifNotEmpty:  [ watchers do: [ :watcher | watcher modelChanged] ].
-	self start 
+	self startClockTimer 
 ]
 
 { #category : #'accessing - computed' }
@@ -88,6 +126,13 @@ EyeDrop >> percentage [
 ]
 
 { #category : #removing }
+EyeDrop >> removeWatcher: aWatcher [ 
+
+	watchers remove: aWatcher. 
+	
+]
+
+{ #category : #watching }
 EyeDrop >> removeWatchers [
 
 	watchers := Set new.
@@ -97,6 +142,15 @@ EyeDrop >> removeWatchers [
 EyeDrop >> start [
 
 	self startTime ifNil: [ self startTime: DateAndTime now ].
+	step <= steps size ifFalse: [ ^ self ].
+	self modelChanged.
+	self startClockTimer
+
+]
+
+{ #category : #accessing }
+EyeDrop >> startClockTimer [
+
 	step <= steps size ifFalse: [ ^ self ].
 	timer := Clock
 		         withBlock: [ self nextStep ]
@@ -114,18 +168,6 @@ EyeDrop >> startTime [
 EyeDrop >> startTime: anObject [
 
 	startTime := anObject
-]
-
-{ #category : #accessing }
-EyeDrop >> step [
-
-	^ step
-]
-
-{ #category : #accessing }
-EyeDrop >> step: anObject [
-
-	step := anObject
 ]
 
 { #category : #accessing }
@@ -170,7 +212,7 @@ EyeDrop >> timer: anObject [
 	^ timer := anObject
 ]
 
-{ #category : #accessing }
+{ #category : #watching }
 EyeDrop >> watchers [
 
 	^ watchers
