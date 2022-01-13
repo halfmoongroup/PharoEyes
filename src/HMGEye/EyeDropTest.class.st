@@ -21,14 +21,14 @@ EyeDropTest >> testAddStepWithDuration [
 { #category : #tests }
 EyeDropTest >> testAddWatcher [
 
-	| drop testObject |
-	drop := Drop  withName: 'DropTest' closed: 1 open: 2 apply: 11.
-	testObject := EyeDrop fromDrop: drop. 
-	self assert: (testObject watchers size) equals: 0. 
-	testObject addWatcher: 'aWatcher'. 
-	self assert: (testObject watchers size) equals: 1. 
-	testObject removeWatchers.
-	self assert: (testObject watchers size) equals: 0. 
+	|  eyeDrop |
+	
+	eyeDrop := EyeDrop fromDrop: (Drop  withName: 'DropTest' closed: 1 open: 2 apply: 11). 
+	self assert: (eyeDrop watchers size) equals: 0. 
+	eyeDrop addWatcher: 'aWatcher'. 
+	self assert: (eyeDrop watchers size) equals: 1. 
+	eyeDrop removeWatchers.
+	self assert: (eyeDrop watchers size) equals: 0. 
 	
 ]
 

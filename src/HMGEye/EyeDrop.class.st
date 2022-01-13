@@ -107,6 +107,12 @@ EyeDrop >> modelState [
 	self modelChanged
 ]
 
+{ #category : #accessing }
+EyeDrop >> name [ 
+	(drop isNotNil) ifTrue: [ ^ self drop name ].
+	^''
+]
+
 { #category : #api }
 EyeDrop >> nextStep [ 
    step:= (step + 1).
