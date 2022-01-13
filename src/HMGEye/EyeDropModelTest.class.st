@@ -34,11 +34,11 @@ EyeDropModelTest >> testAdvanceToNextDrop [
 	|model result|
 
 	model   := EyeDropModel new. 
-	model prepareModelWithDrops: (self class sampleEyeDropData).
-	self assert: (model currentDrop dropName) equals: (((self class sampleEyeDropData ) at: 1) dropName).
+	model prepareModelWithDrops: (DropInventory testDropData ).
+	self assert: (model currentDrop dropName) equals: (((DropInventory testDropData ) at: 1) dropName).
 	result := model advanceToNextDrop.
 	self assert: result.
-	self assert: (model currentDrop dropName) equals: (((self class sampleEyeDropData ) at: 2) dropName).
+	self assert: (model currentDrop dropName) equals: (((DropInventory testDropData ) at: 2) dropName).
 	
 ]
 
