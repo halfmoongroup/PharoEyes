@@ -1,3 +1,7 @@
+"
+a repo for drop data. 
+
+"
 Class {
 	#name : #DropInventory,
 	#superclass : #Object,
