@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'eyeDrop',
 		'name',
-		'phase',
+		'stepName',
 		'progressBar',
 		'startButton',
 		'endButton',
@@ -33,7 +33,7 @@ EyeDropInfoPresenter >> initializePresenter [
 
 	| pauseButton |
 	name := self newLabel.
-	phase := self newLabel.
+	stepName := self newLabel.
 	timeRemaining := self newLabel label: '0:00'.
 	secondsPassed := self newLabel label: '0:00'.
 	startButton := self newButton label: 'Start'; action: [self  start].
@@ -48,7 +48,7 @@ EyeDropInfoPresenter >> initializePresenter [
 					  spacing: 15;
 					  add: 'Drop Info: ' expand: false;
 					  add: name expand: false;
-					  add: phase expand: false;
+					  add: stepName expand: false;
 					  yourself)
 			 expand: false;
 			 add: (SpBoxLayout newHorizontal  
@@ -73,7 +73,7 @@ EyeDropInfoPresenter >> initializePresenter [
 EyeDropInfoPresenter >> modelChanged [
 	
 	name label: (self eyeDrop) drop name. 
-	phase label: (self eyeDrop) stepName. 
+	stepName label: (self eyeDrop) stepName. 
 ]
 
 { #category : #accessing }
@@ -96,18 +96,6 @@ EyeDropInfoPresenter >> percentage [
 ]
 
 { #category : #accessing }
-EyeDropInfoPresenter >> phase [
-
-	^ phase
-]
-
-{ #category : #accessing }
-EyeDropInfoPresenter >> phase: anObject [
-
-	phase := anObject
-]
-
-{ #category : #accessing }
 EyeDropInfoPresenter >> progressBar [
 
 	^ progressBar
@@ -124,4 +112,16 @@ EyeDropInfoPresenter >> start [
 " eyeDrop start."
  eyeDrop addWatcher: self. 
  self modelChanged 
+]
+
+{ #category : #accessing }
+EyeDropInfoPresenter >> stepName [
+
+	^ stepName
+]
+
+{ #category : #accessing }
+EyeDropInfoPresenter >> stepName: anObject [
+
+	stepName := anObject
 ]

@@ -31,7 +31,8 @@ EyeDropModel >> advanceToNextDrop [
 { #category : #'as yet unclassified' }
 EyeDropModel >> currentDrop [ 
 
-	^ currentDrops at: index. 
+	(index <= currentDrops size) ifTrue: [ ^currentDrops at: index ].
+	^ nil
 ]
 
 { #category : #accessing }
