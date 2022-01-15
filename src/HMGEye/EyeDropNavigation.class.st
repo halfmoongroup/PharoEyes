@@ -5,12 +5,25 @@ Class {
 	#name : #EyeDropNavigation,
 	#superclass : #SpPresenter,
 	#instVars : [
-		'next',
+		'nextButton',
 		'startTimer',
 		'resetTimer',
 		'name',
-		'stage',
+		'stepName',
 		'timeRemaining'
 	],
 	#category : #'HMGEye-ui'
 }
+
+{ #category : #initialization }
+EyeDropNavigation >> initializePresenter [
+
+
+	name := self newLabel. 
+	stepName := self newLabel.
+	timeRemaining := self newLabel. 
+	startTimer := self newButton. 
+	resetTimer := self newButton. 
+	nextButton := self newButton. 
+	
+]

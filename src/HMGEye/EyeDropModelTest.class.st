@@ -37,8 +37,11 @@ EyeDropModelTest >> testAdvanceToNextDrop [
 	model prepareModelWithDrops: (DropInventory testDropData ).
 	self assert: (model currentDrop dropName) equals: (((DropInventory testDropData ) at: 1) dropName).
 	result := model advanceToNextDrop.
-	self assert: result.
+	(1 = (model dropsForTime size)) ifTrue: [self assert: (result = false)  ]
+	ifFalse: [ self assert: result. ].
+	result ifTrue: [ 
 	self assert: (model currentDrop dropName) equals: (((DropInventory testDropData ) at: 2) dropName).
+	]
 	
 ]
 
